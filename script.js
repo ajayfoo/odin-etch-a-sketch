@@ -13,7 +13,7 @@ function getRow(length) {
     return row;
 }
 
-function drawSquareGrid(length, breadth) {
+function drawGrid(length, breadth) {
     const grid = document.getElementById('grid');
     for (let i = 0; i < length; ++i) {
         grid.appendChild(getRow(breadth));
@@ -31,5 +31,13 @@ function changeBackgroundColorOfEveryBoxOnHover() {
     }
 }
 
-drawSquareGrid(16, 16);
+function recreateGrid() {
+    const length = prompt('Enter Grid length');
+    const grid = document.getElementById('grid');
+    const rows = grid.querySelectorAll('.row');
+    rows.forEach(row => row.remove());
+    drawGrid(length, length);
+}
+
+drawGrid(16, 16);
 changeBackgroundColorOfEveryBoxOnHover();
