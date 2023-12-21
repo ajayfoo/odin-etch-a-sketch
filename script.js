@@ -20,4 +20,16 @@ function drawSquareGrid(length, breadth) {
     }
 }
 
+function changeBackgroundColorOfEveryBoxOnHover() {
+    const grid = document.getElementById('grid');
+    for (const row of grid.querySelectorAll('.row')) {
+        for (const box of row.querySelectorAll('.box')) {
+            box.addEventListener('mouseenter', (event) => {
+                event.target.style.backgroundColor = 'black';
+            });
+        }
+    }
+}
+
 drawSquareGrid(16, 16);
+changeBackgroundColorOfEveryBoxOnHover();
