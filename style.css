@@ -1,0 +1,27 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+#grid {
+    display: flex;
+    flex-direction: column;
+}
+
+#grid .row {
+    display: flex;
+    justify-content: center;
+}
+
+#grid .row .box {
+    background-color: mistyrose;
+    flex-grow: 1;
+    margin: 3px;
+    min-width: 30px;
+    min-height: 30px;
+}
