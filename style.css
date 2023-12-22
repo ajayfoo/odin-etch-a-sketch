@@ -8,9 +8,15 @@ html {
     box-sizing: inherit;
 }
 
+#recreate-grid {
+    display: block;
+    margin: 10px auto;
+}
+
 #grid {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #grid .row {
@@ -22,6 +28,6 @@ html {
     background-color: mistyrose;
     flex-grow: 1;
     margin: 0;
-    min-width: 30px;
-    min-height: 30px;
+    width: 30px;
+    height: 30px;
 }

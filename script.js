@@ -13,13 +13,6 @@ function getRow(length) {
     return row;
 }
 
-function drawGrid(length, breadth) {
-    const grid = document.getElementById('grid');
-    for (let i = 0; i < length; ++i) {
-        grid.appendChild(getRow(breadth));
-    }
-}
-
 function changeBackgroundColorOfEveryBoxOnHover() {
     const grid = document.getElementById('grid');
     for (const row of grid.querySelectorAll('.row')) {
@@ -31,6 +24,14 @@ function changeBackgroundColorOfEveryBoxOnHover() {
     }
 }
 
+function drawGrid(length, breadth) {
+    const grid = document.getElementById('grid');
+    for (let i = 0; i < length; ++i) {
+        grid.appendChild(getRow(breadth));
+    }
+    changeBackgroundColorOfEveryBoxOnHover();
+}
+
 function recreateGrid() {
     const length = prompt('Enter Grid length');
     const grid = document.getElementById('grid');
@@ -40,4 +41,7 @@ function recreateGrid() {
 }
 
 drawGrid(16, 16);
-changeBackgroundColorOfEveryBoxOnHover();
+const recreateGridBtn = document.getElementById('recreate-grid');
+recreateGridBtn.addEventListener('click', () => {
+    recreateGrid();
+});
