@@ -1,5 +1,13 @@
-function getBox() {
+
+function getIdealBoxSize(numOfBoxes) {
+    return Math.round((16 / numOfBoxes) * 30) + 'px';
+}
+
+function getBox(length) {
     const box = document.createElement('div');
+    const idealSize = getIdealBoxSize(length);
+    box.style.width = idealSize;
+    box.style.height = idealSize;
     box.classList.add('box');
     return box;
 }
@@ -8,7 +16,7 @@ function getRow(length) {
     const row = document.createElement('div');
     row.classList.add('row');
     for (let i = 0; i < length; ++i) {
-        row.appendChild(getBox());
+        row.appendChild(getBox(length));
     }
     return row;
 }

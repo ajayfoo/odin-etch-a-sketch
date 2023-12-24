@@ -26,8 +26,5 @@ html {
 
 #grid .row .box {
     background-color: mistyrose;
-    flex-grow: 1;
     margin: 0;
-    width: 30px;
-    height: 30px;
 }
