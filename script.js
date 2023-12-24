@@ -41,7 +41,12 @@ function drawGrid(length, breadth) {
 }
 
 function recreateGrid() {
-    const length = prompt('Enter Grid length');
+    let length;
+    while (true) {
+        length = prompt('Enter Grid length(Max: 100)');
+        if (length <= 100) break;
+    }
+    if (length === null) return;
     const grid = document.getElementById('grid');
     const rows = grid.querySelectorAll('.row');
     rows.forEach(row => row.remove());
