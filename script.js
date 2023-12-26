@@ -29,12 +29,18 @@ function randColor() {
     return `rgb( ${randInt(255)} ${randInt(255)} ${randInt(255)})`;
 }
 
-function changeBackgroundColorOfEveryBoxOnHover() {
+function changeBackgroundColorOfEveryBoxOnHover(randomize) {
     const grid = document.getElementById('grid');
     for (const row of grid.querySelectorAll('.row')) {
         for (const box of row.querySelectorAll('.box')) {
             box.addEventListener('mouseenter', (event) => {
-                event.target.style.backgroundColor = randColor();
+                if (randomize) {
+
+                    event.target.style.backgroundColor = randColor();
+                }
+                else {
+                    event.target.style.backgroundColor = 'black';
+                }
             });
         }
     }
@@ -65,4 +71,11 @@ drawGrid(16, 16);
 const recreateGridBtn = document.getElementById('recreate-grid');
 recreateGridBtn.addEventListener('click', () => {
     recreateGrid();
+});
+
+const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
+enableRandColorLineCheckbox.addEventListener('click', () => {
+    changeBackgroundColorOfEveryBoxOnHover(
+        enableRandColorLineCheckbox.checked === true
+    );
 });
