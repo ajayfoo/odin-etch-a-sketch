@@ -8,9 +8,10 @@ html {
     box-sizing: inherit;
 }
 
-#recreate-grid {
-    display: block;
-    margin: 10px auto;
+#controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
 }
 
 #grid {
