@@ -21,12 +21,20 @@ function getRow(length) {
     return row;
 }
 
+function randInt(max) {
+    return Math.floor(Math.random() * max) + 1;
+}
+
+function randColor() {
+    return `rgb( ${randInt(255)} ${randInt(255)} ${randInt(255)})`;
+}
+
 function changeBackgroundColorOfEveryBoxOnHover() {
     const grid = document.getElementById('grid');
     for (const row of grid.querySelectorAll('.row')) {
         for (const box of row.querySelectorAll('.box')) {
             box.addEventListener('mouseenter', (event) => {
-                event.target.style.backgroundColor = 'black';
+                event.target.style.backgroundColor = randColor();
             });
         }
     }
