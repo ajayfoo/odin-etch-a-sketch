@@ -1,4 +1,11 @@
 
+const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
+enableRandColorLineCheckbox.addEventListener('click', () => {
+    changeBackgroundColorOfEveryBoxOnHover(
+        enableRandColorLineCheckbox.checked === true
+    );
+});
+
 function getIdealBoxSize(numOfBoxes) {
     return Math.round((16 / numOfBoxes) * 30) + 'px';
 }
@@ -51,7 +58,9 @@ function drawGrid(length, breadth) {
     for (let i = 0; i < length; ++i) {
         grid.appendChild(getRow(breadth));
     }
-    changeBackgroundColorOfEveryBoxOnHover();
+    changeBackgroundColorOfEveryBoxOnHover(
+        enableRandColorLineCheckbox.checked === true
+    );
 }
 
 function recreateGrid() {
@@ -71,11 +80,4 @@ drawGrid(16, 16);
 const recreateGridBtn = document.getElementById('recreate-grid');
 recreateGridBtn.addEventListener('click', () => {
     recreateGrid();
-});
-
-const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
-enableRandColorLineCheckbox.addEventListener('click', () => {
-    changeBackgroundColorOfEveryBoxOnHover(
-        enableRandColorLineCheckbox.checked === true
-    );
 });
