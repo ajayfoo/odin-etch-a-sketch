@@ -1,5 +1,6 @@
 
 const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
+let hoverCounts = [];
 enableRandColorLineCheckbox.addEventListener('click', () => {
     changeBackgroundColorOfEveryBoxOnHover(
         enableRandColorLineCheckbox.checked === true
@@ -38,22 +39,32 @@ function randColor() {
 
 function changeBackgroundColorOfEveryBoxOnHover(randomize) {
     const grid = document.getElementById('grid');
-    for (const row of grid.querySelectorAll('.row')) {
-        for (const box of row.querySelectorAll('.box')) {
-            box.addEventListener('mouseenter', (event) => {
-                if (randomize) {
-
-                    event.target.style.backgroundColor = randColor();
-                }
-                else {
-                    event.target.style.backgroundColor = 'black';
-                }
-            });
-        }
+    let allBoxes = [];
+    const rows = grid.querySelectorAll('.row');
+    rows.forEach((row) => {
+        const boxes = row.querySelectorAll('.box');
+        boxes.forEach(box => {
+            allBoxes.push(box);
+        });
+    });
+    for (let i = 0; i < allBoxes.length; ++i) {
+        allBoxes[i].addEventListener('mouseenter', () => {
+            if (randomize) {
+                allBoxes[i].style.backgroundColor = randColor();
+                console.log('randomize');
+            }
+            else {
+                const hoverCount = ++hoverCounts[i];
+                allBoxes[i].style.backgroundColor = getColorValue(hoverCount);
+                console.log('black&white');
+            }
+        });
     }
 }
 
 function drawGrid(length, breadth) {
+    hoverCounts.length = length * breadth;
+    hoverCounts = hoverCounts.fill(0);
     const grid = document.getElementById('grid');
     for (let i = 0; i < length; ++i) {
         grid.appendChild(getRow(breadth));
@@ -74,6 +85,12 @@ function recreateGrid() {
     const rows = grid.querySelectorAll('.row');
     rows.forEach(row => row.remove());
     drawGrid(length, length);
+}
+
+function getColorValue(hoverCount) {
+    const normalizedHoverCount = (hoverCount >= 10 ? 10 : hoverCount) * 10;
+    const brightnessValue = (100 - normalizedHoverCount) + '%';
+    return `rgb(${brightnessValue} ${brightnessValue} ${brightnessValue})`;
 }
 
 drawGrid(16, 16);
