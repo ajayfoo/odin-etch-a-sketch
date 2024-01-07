@@ -1,4 +1,4 @@
-const GRID_WIDTH = 560;
+const GRID_WIDTH = 480;
 const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
 let hoverCounts = [];
 enableRandColorLineCheckbox.addEventListener('click', () => {
