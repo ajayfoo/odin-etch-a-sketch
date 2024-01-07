@@ -1,4 +1,4 @@
-
+const GRID_WIDTH = 560;
 const enableRandColorLineCheckbox = document.getElementById('enable-rand-color');
 let hoverCounts = [];
 enableRandColorLineCheckbox.addEventListener('click', () => {
@@ -7,15 +7,11 @@ enableRandColorLineCheckbox.addEventListener('click', () => {
     );
 });
 
-function getIdealBoxSize(numOfBoxes) {
-    return Math.round((16 / numOfBoxes) * 30) + 'px';
-}
-
 function getBox(length) {
     const box = document.createElement('div');
-    const idealSize = getIdealBoxSize(length);
-    box.style.width = idealSize;
-    box.style.height = idealSize;
+    const size = (GRID_WIDTH / length) + 'px';
+    box.style.width = size;
+    box.style.height = size;
     box.classList.add('box');
     return box;
 }
@@ -57,7 +53,6 @@ function removePreviousEventListeners(nodeList) {
 }
 
 function changeBackgroundColorOfEveryBoxOnHover(randomize) {
-    console.debug(randomize);
     let allBoxes = getAllBoxes();
     removePreviousEventListeners(allBoxes);
     allBoxes = getAllBoxes();
