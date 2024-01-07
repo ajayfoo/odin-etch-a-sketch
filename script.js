@@ -3,7 +3,7 @@ const enableRandColorLineCheckbox = document.getElementById('enable-rand-color')
 let hoverCounts = [];
 enableRandColorLineCheckbox.addEventListener('click', () => {
     changeBackgroundColorOfEveryBoxOnHover(
-        enableRandColorLineCheckbox.checked === true
+        enableRandColorLineCheckbox.checked
     );
 });
 
@@ -37,7 +37,7 @@ function randColor() {
     return `rgb( ${randInt(255)} ${randInt(255)} ${randInt(255)})`;
 }
 
-function changeBackgroundColorOfEveryBoxOnHover(randomize) {
+function getAllBoxes() {
     const grid = document.getElementById('grid');
     let allBoxes = [];
     const rows = grid.querySelectorAll('.row');
@@ -47,16 +47,28 @@ function changeBackgroundColorOfEveryBoxOnHover(randomize) {
             allBoxes.push(box);
         });
     });
+    return allBoxes;
+}
+
+function removePreviousEventListeners(nodeList) {
+    for (let i = 0; i < nodeList.length; ++i) {
+        nodeList[i].replaceWith(nodeList[i].cloneNode());
+    }
+}
+
+function changeBackgroundColorOfEveryBoxOnHover(randomize) {
+    console.debug(randomize);
+    let allBoxes = getAllBoxes();
+    removePreviousEventListeners(allBoxes);
+    allBoxes = getAllBoxes();
     for (let i = 0; i < allBoxes.length; ++i) {
         allBoxes[i].addEventListener('mouseenter', () => {
             if (randomize) {
                 allBoxes[i].style.backgroundColor = randColor();
-                console.log('randomize');
             }
             else {
                 const hoverCount = ++hoverCounts[i];
                 allBoxes[i].style.backgroundColor = getColorValue(hoverCount);
-                console.log('black&white');
             }
         });
     }
@@ -70,7 +82,7 @@ function drawGrid(length, breadth) {
         grid.appendChild(getRow(breadth));
     }
     changeBackgroundColorOfEveryBoxOnHover(
-        enableRandColorLineCheckbox.checked === true
+        enableRandColorLineCheckbox.checked
     );
 }
 
